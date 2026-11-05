@@ -20,10 +20,51 @@ if ("IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
-// Price per m², inkl. mva. The price section in index.html shows example amounts based on this.
+// Price per m², inkl. mva. Used by the price calculator and the form estimate.
 const PRICE_PER_M2 = 100;
 const PER_M2_SERVICES = ["Flyttevask", "Utflyttingsvask for leietakere"];
 const SHORT_TERM_SERVICE = "Vask av korttidsutleie";
+
+// Price calculator: slider + m² field + total
+const CALC_MIN = 20;
+const CALC_MAX = 250;
+
+document.querySelectorAll("[data-calc]").forEach((calc) => {
+  const range = calc.querySelector("[data-range]");
+  const number = calc.querySelector("[data-number]");
+  const total = calc.querySelector("[data-total]");
+  const cta = calc.querySelector("[data-calc-cta]");
+
+  const currentSize = () => {
+    const size = Number(number.value);
+    return number.value !== "" && size >= 1 && size <= 1000 ? size : null;
+  };
+
+  const update = () => {
+    const size = currentSize();
+    total.textContent = size ? `${Math.round(size * PRICE_PER_M2).toLocaleString("nb-NO")} kr` : "–";
+    range.value = Math.min(CALC_MAX, Math.max(CALC_MIN, size || CALC_MIN));
+    const pct = ((Number(range.value) - CALC_MIN) / (CALC_MAX - CALC_MIN)) * 100;
+    range.style.setProperty("--pct", `${pct}%`);
+  };
+
+  range.addEventListener("input", () => {
+    number.value = range.value;
+    update();
+  });
+  number.addEventListener("input", update);
+
+  // Carry the chosen size into the booking form.
+  cta.addEventListener("click", () => {
+    const size = currentSize();
+    const sizeField = document.getElementById("storrelse");
+    if (!size || !sizeField) return;
+    sizeField.value = Math.round(size);
+    sizeField.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  update();
+});
 
 // Multi-step lead form (only present on pages with the form)
 const form = document.getElementById("lead-form");

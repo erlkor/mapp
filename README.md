@@ -18,10 +18,7 @@ Footer og header er kopiert inn i alle tre HTML-filene. Endrer du telefon, e-pos
 
 ## Pris
 
-Prisen per m² (100 kr, inkl. mva) står to steder:
-
-- `PRICE_PER_M2` øverst i `js/script.js` (prisestimatet i skjemaet)
-- Eksempelprisene og teksten i seksjonen «Fast pris per kvadratmeter» og FAQ i `index.html`, og «Pris og betaling» i `vilkaar.html`
+Prisen per m² (100 kr, inkl. mva) styres av `PRICE_PER_M2` øverst i `js/script.js`. Den brukes av prisberegneren (slider) i seksjonen «Fast pris per kvadratmeter» og av prisestimatet i skjemaet. Selve teksten «100 kr per m²» står i tillegg i seksjonsingressen og FAQ i `index.html`, og i «Pris og betaling» i `vilkaar.html`. Slideren går fra 20 til 250 m² (`CALC_MIN`/`CALC_MAX`), og feltet tar imot opptil 1000 m².
 
 ## Før lansering
 

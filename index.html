@@ -235,31 +235,29 @@
         Flyttevask og utflyttingsvask koster 100 kr per m², inkl. mva. Prisen bekreftes før jeg starter, og du betaler først etter vasken.
       </p>
 
-      <div class="price-grid">
-        <div class="price-card reveal">
-          <p class="price-size">40 m²</p>
-          <p class="price-amount">4 000 kr</p>
+      <div class="price-calc reveal" data-calc>
+        <div class="price-calc-card">
+          <p class="calc-label">Boligstørrelse</p>
+          <div class="calc-slider">
+            <input type="range" class="calc-range" data-range min="20" max="250" step="5" value="60" aria-label="Boligstørrelse i kvadratmeter">
+            <div class="calc-scale"><span>20 m²</span><span>250 m²</span></div>
+          </div>
+          <label class="calc-input">
+            <input type="number" data-number min="1" max="1000" step="1" value="60" inputmode="numeric" aria-label="Boligstørrelse i kvadratmeter">
+            <span>m²</span>
+          </label>
         </div>
-        <div class="price-card reveal">
-          <p class="price-size">60 m²</p>
-          <p class="price-amount">6 000 kr</p>
-        </div>
-        <div class="price-card reveal">
-          <p class="price-size">90 m²</p>
-          <p class="price-amount">9 000 kr</p>
-        </div>
-        <div class="price-card reveal">
-          <p class="price-size">120 m²</p>
-          <p class="price-amount">12 000 kr</p>
+        <div class="price-calc-panel">
+          <p class="calc-label">Totalpris</p>
+          <output class="calc-total" data-total aria-live="polite">6 000 kr</output>
+          <p class="calc-sub">inkl. mva · bekreftes før jeg starter</p>
+          <a href="#skjema" class="btn btn-primary btn-large" data-calc-cta>Få fastpris</a>
         </div>
       </div>
 
       <p class="include-note reveal">
-        Alle priser er inkl. mva. Vask av korttidsutleie, hytter og leiligheter, prises etter avtale. Send en forespørsel, så får du et tilbud.
+        Vask av korttidsutleie, hytter og leiligheter, prises etter avtale. Send en forespørsel, så får du et tilbud.
       </p>
-      <div class="section-cta reveal">
-        <a href="#skjema" class="btn btn-primary btn-large">Få fastpris</a>
-      </div>
     </div>
   </section>
 
