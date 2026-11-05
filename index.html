@@ -237,21 +237,23 @@
 
       <div class="reveal" data-calc>
         <div class="price-calc">
-          <div class="price-calc-card">
-            <p class="calc-label">Boligstørrelse</p>
-            <div class="calc-slider">
-              <input type="range" class="calc-range" data-range min="20" max="250" step="5" value="60" aria-label="Boligstørrelse i kvadratmeter">
-              <div class="calc-scale"><span>20 m²</span><span>250 m²</span></div>
-            </div>
-            <label class="calc-input">
-              <input type="number" data-number min="1" max="1000" step="1" value="60" inputmode="numeric" aria-label="Boligstørrelse i kvadratmeter">
-              <span>m²</span>
-            </label>
-          </div>
           <div class="price-calc-panel">
             <p class="calc-label">Totalpris</p>
             <output class="calc-total" data-total aria-live="polite">6 000 kr</output>
             <p class="calc-sub">inkl. mva · bekreftes før jeg starter</p>
+          </div>
+          <div class="price-calc-card">
+            <div class="calc-head">
+              <p class="calc-label">Boligstørrelse</p>
+              <label class="calc-input">
+                <input type="number" data-number min="1" max="1000" step="1" value="60" inputmode="numeric" aria-label="Boligstørrelse i kvadratmeter">
+                <span>m²</span>
+              </label>
+            </div>
+            <div class="calc-slider">
+              <input type="range" class="calc-range" data-range min="20" max="250" step="5" value="60" aria-label="Boligstørrelse i kvadratmeter">
+              <div class="calc-scale"><span>20 m²</span><span>250 m²</span></div>
+            </div>
           </div>
         </div>
         <div class="price-calc-cta">

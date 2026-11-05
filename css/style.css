@@ -264,24 +264,26 @@ section[id] { scroll-margin-top: 84px; }
 .how-card p { color: var(--text-muted); font-size: 0.95rem; }
 
 /* Pricing calculator */
-.price-calc { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; max-width: 920px; }
-.price-calc-card {
-  display: flex; flex-direction: column; gap: 22px;
-  padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-}
-.price-calc-panel {
+.price-calc { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; max-width: 920px; }
+.price-calc-card, .price-calc-panel {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 32px; background: var(--accent); color: #ffffff;
-  border-radius: var(--radius-lg); box-shadow: var(--shadow);
+  padding: 32px; border-radius: var(--radius-lg);
 }
+.price-calc-card { background: var(--surface); border: 1px solid var(--border); }
+.price-calc-panel { background: var(--accent); color: #ffffff; box-shadow: var(--shadow); }
 .price-calc-cta { margin-top: 24px; }
 
 .calc-label {
-  margin-bottom: 0;
+  margin-bottom: 14px;
   font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase;
   color: var(--text-muted);
 }
-.price-calc-panel .calc-label { margin-bottom: 10px; color: rgba(255, 255, 255, 0.65); }
+.price-calc-panel .calc-label { color: rgba(255, 255, 255, 0.65); }
+.calc-head {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 12px; margin-bottom: 20px;
+}
+.calc-head .calc-label { margin-bottom: 0; }
 .calc-total {
   display: block; color: var(--brand);
   font-family: var(--font-headline); font-weight: 600; letter-spacing: -0.02em;
@@ -320,7 +322,7 @@ section[id] { scroll-margin-top: 84px; }
 }
 
 .calc-input {
-  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   padding: 8px 18px; background: var(--bg);
   border: 1.5px solid var(--border); border-radius: 999px;
 }
@@ -532,7 +534,6 @@ section[id] { scroll-margin-top: 84px; }
   .section { padding: 64px 0; }
   .how-grid, .trust-grid { grid-template-columns: 1fr; }
   .price-calc { grid-template-columns: 1fr; }
-  .price-calc-panel { order: -1; }
   .price-calc-card, .price-calc-panel { padding: 24px; }
   .form-card { padding: 28px; }
   .site-footer { padding-top: 40px; }
