@@ -1,46 +1,43 @@
-# måpp — landingsside
+# måpp: renhold i Gudbrandsdalen
 
-Enkel, rask ettsides landingsside for lead-generering til flyttevask i Oslo.
-Bygget som ren HTML/CSS/JS uten rammeverk eller byggeprosess — null hosting-kostnad på f.eks. Cloudflare Pages, Netlify eller GitHub Pages.
+Statisk nettside (HTML/CSS/JS, ingen byggeprosess) for måpp: flyttevask, utflyttingsvask for leietakere og vask av korttidsutleie. Kan hostes gratis på Cloudflare Pages eller Netlify.
 
-## Filstruktur
+## Filer
 
 ```
-index.html        Hele siden (hero, sammenligning, slik funker det, tillit, FAQ, skjema, footer)
-css/style.css      All styling (design-tokens øverst i filen)
-js/script.js       Mobilmeny, scroll-animasjoner, flerstegs-skjema, innsending
-favicon.svg        Enkel wordmark-favicon
+index.html         Forsiden (hero, tjenester, inkludert, slik funker det, pris, tillit, FAQ, skjema)
+personvern.html    Personvernerklæring
+vilkaar.html       Vilkår (pris, avbestilling, garanti, angrerett)
+css/style.css      All styling (farger og mål øverst i filen)
+js/script.js       Skjema (3 steg), prisestimat, scroll-animasjoner
+Sharp_Grotesk/     Skrifttype for overskrifter og logo
+robots.txt, sitemap.xml, _redirects
 ```
 
-## Før du publiserer — dette MÅ gjøres
+Footer og header er kopiert inn i alle tre HTML-filene. Endrer du telefon, e-post eller org.nr, må du endre det i alle tre.
 
-1. **Koble på skjemaet (Formspree)**
-   - Opprett gratis konto på [formspree.io](https://formspree.io) og lag et nytt skjema.
-   - Du får en URL som `https://formspree.io/f/xxxxxxxx`.
-   - Bytt ut `REPLACE_WITH_YOUR_FORM_ID` i `index.html` (i `<form action="...">`) med din egen ID.
-   - Formspree sender deg e-post for hver innsending automatisk, og du kan se alle leads i dashbordet deres (dekker "e-post + enkel lead-logg" uten at du trenger egen backend).
+## Pris
 
-2. **Kjøp domene** (f.eks. `maapp.no`) og pek det til hostingen du velger.
+Prisen per m² (100 kr, inkl. mva) står to steder:
 
-## Anbefalt gratis/billig hosting
+- `PRICE_PER_M2` øverst i `js/script.js` (prisestimatet i skjemaet)
+- Eksempelprisene og teksten i seksjonen «Fast pris per kvadratmeter» og FAQ i `index.html`, og «Pris og betaling» i `vilkaar.html`
 
-Siden er 100 % statisk, så alle disse funker uten kostnad ved lavt trafikkvolum:
+## Før lansering
 
-- **Cloudflare Pages** — dra-og-slipp mappen, eller koble GitHub-repo.
-- **Netlify** — samme som over, gratis SSL og eget domene inkludert.
-- **GitHub Pages** — gratis hvis du er ok med GitHub som kilde.
+1. **Formspree:** lag et skjema på formspree.io og bytt ut `REPLACE_WITH_YOUR_FORM_ID` i `<form action>` i `index.html`. Slå på e-postvarsler på mobilen, siden du lover svar innen noen timer.
+2. **Arbeidstilsynet:** renholdsvirksomhet må være godkjent (gjelder også enkeltpersonforetak uten ansatte og privatkunder). Du kan selge mens søknaden er «under behandling». Send søknaden via Altinn, sjekk også at næringskode og mva-registrering er på plass.
+3. **Mva:** passerer du 50 000 kr på 12 måneder må du registrere deg. Prisene på siden er oppgitt inkl. mva.
+4. **Påstander må stemme:** ikke skriv «Godkjent renholdsvirksomhet» før Arbeidstilsynet har godkjent deg, og ikke «Forsikret» før forsikringen er på plass. Legg dem til i banneret og «Hvorfor stole på måpp» når det er sant.
+5. **Tekster som må leses gjennom av deg (og gjerne en jurist):** `vilkaar.html` (særlig avbestillingsgebyr, angrerett og garantivilkår) og `personvern.html` (leverandører, lagring, overføring utenfor EØS).
+6. **Avbestillingsgebyr:** vilkårene sier bare at et «rimelig gebyr» kan kreves etter 24 timer. Bestem et konkret beløp.
+7. **DNS:** `maapp.no` ligger på den gamle siden. Når du flytter domenet, behold e-postoppsettet (MX-postene), ellers slutter `post@maapp.no` å virke.
+8. **Redirect:** `_redirects` sender `/personvernerklaering` (gammel URL) til `/personvern.html`. Det virker på Netlify og Cloudflare Pages, ikke på GitHub Pages.
+9. **Etter lansering:** Search Console (send inn `sitemap.xml`), Google Bedriftsprofil som tjenesteområde-bedrift, og en enkel analyse (f.eks. Plausible).
 
-Alle tre støtter enkelt å koble på et eget domene med gratis SSL.
+## Parkert til senere
 
-## Tilpasning
-
-- **Farger**: alt styres fra `:root` øverst i `css/style.css` (`--bg`, `--brand`, `--accent`).
-- **Tekst/innhold**: alt tekstinnhold ligger direkte i `index.html` — ingen CMS.
-- **Skjemafelter**: endre/legg til felter i `<form id="lead-form">`. Husk at `name`-attributtet på hvert felt blir kolonnenavnet du ser i Formspree/e-posten du mottar.
-
-## Ting å vurdere før lansering
-
-- **Skjemainnhold**: skjemaet spør om postnummer/bydel, boligstørrelse og ønsket dato i steg 1, og navn/telefon/e-post i steg 2. Juster gjerne basert på hva du faktisk trenger for å matche en rengjører.
-- **Konkrete tall i "Hvorfor stole på måpp"-seksjonen**: teksten om kvalitetssikring er bevisst holdt generell (ingen påstander om antall rengjørere, responstid eller garantier som ikke er bekreftet). Hvis du har konkrete tall (f.eks. "matches innen 24 timer", "X kvalitetssikrede rengjørere i Oslo", en reell flyttevaskgaranti), bør disse inn — spesifikke tall konverterer bedre enn generiske påstander.
-- **Anmeldelser/testimonials**: det er foreløpig ikke lagt inn noen seksjon for kundeanmeldelser siden du ikke har dette klart ennå. Dette er trolig det enkeltelementet som vil løfte konverteringen mest når du har noen — sett av plass i designet rett under "Slik funker det" når du har 3–5 gode sitater eller stjerner fra Google/Facebook.
-- **Analytics**: ingen sporing er lagt inn. Vurder et personvernvennlig alternativ (f.eks. Plausible eller Cloudflare Web Analytics) for å måle konvertering fra CTA-klikk til fullført skjema.
+- **Reisetillegg:** kjerneområdet er Sel, Vågå, Lom, Nord-Fron, Dovre og Sør-Fron. Resten av Gudbrandsdalen er utvidet område. Ingen reisetillegg foreløpig; hvis det innføres, kan skjemaet sjekke postnummer og vise pris deretter.
+- **Bilder og «Om meg»:** legg til portrett, før/etter-bilder og navn når du er klar.
+- **Anmeldelser:** egen seksjon etter de første oppdragene.
+- **Minstepris**, pris for korttidsutleie og eventuelle tillegg (utvendig vindusvask).

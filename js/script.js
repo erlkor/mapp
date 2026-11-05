@@ -20,10 +20,54 @@ if ("IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
+// Price per m², inkl. mva. The price section in index.html shows example amounts based on this.
+const PRICE_PER_M2 = 100;
+const PER_M2_SERVICES = ["Flyttevask", "Utflyttingsvask for leietakere"];
+const SHORT_TERM_SERVICE = "Vask av korttidsutleie";
+
 // Multi-step lead form (only present on pages with the form)
 const form = document.getElementById("lead-form");
 
 if (form) {
+  const serviceSelect = document.getElementById("tjeneste");
+  const dateInput = document.getElementById("dato");
+  const sizeInput = document.getElementById("storrelse");
+  const estimate = document.getElementById("form-estimate");
+  const estimateField = document.getElementById("estimat-felt");
+
+  const today = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  dateInput.min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+  const updateEstimate = () => {
+    const size = Number(sizeInput.value);
+    let text = "";
+    let fieldValue = "";
+
+    if (serviceSelect.value === SHORT_TERM_SERVICE) {
+      text = "Pris for korttidsutleie avtales ut fra boligen.";
+      fieldValue = "Avtales";
+    } else if (PER_M2_SERVICES.includes(serviceSelect.value) && size > 0) {
+      const formatted = Math.round(size * PRICE_PER_M2).toLocaleString("nb-NO").replace(/ /g, " ");
+      text = `Estimert pris: ${formatted} kr inkl. mva. Bekreftes av meg før jeg starter.`;
+      fieldValue = `${formatted} kr inkl. mva`;
+    }
+
+    estimate.textContent = text;
+    estimate.hidden = !text;
+    estimateField.value = fieldValue;
+  };
+
+  serviceSelect.addEventListener("change", updateEstimate);
+  sizeInput.addEventListener("input", updateEstimate);
+
+  document.querySelectorAll("[data-service]").forEach((link) => {
+    link.addEventListener("click", () => {
+      serviceSelect.value = link.dataset.service;
+      updateEstimate();
+    });
+  });
+
   const steps = Array.from(form.querySelectorAll(".form-step"));
   const progress = document.getElementById("form-progress");
   const formIntro = document.getElementById("form-intro");
